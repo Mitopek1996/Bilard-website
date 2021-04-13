@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+                <article>
+                    <header>
+                        <div class="title">
+                            <h1>Strona Główna</h1>
+                        </div>
+                        <div class ="articlecenter">
+                            <h3>Bilbek Bilard Club </h3>
+                            <img src="img/mainpage.png" alt="Nie można zaladować obrazka" style="width:400px;"/>
+                            <br><br>
+                        </div>
+                    </header>
+                    <b>Bilbek</b> od wielu lat jest najpopularniejszym klubem bilardowym w Białymstoku. Każdego dnia przybywa nam wielu nowych graczy.
+                    Chcesz zagrać turniej? Nasz klub regularnie organizuje turnieje bilardowe. Każdy zarejestrowany użytkownik, może zapisać się na wybrany przez siebie turniej.
+                    Czy może tylko zwykły mecz? W naszym klubie zawsze możesz zagrać też zwykły mecz, nie ważne czy jesteś początkujący!
+                    <br><br><br>
+                    <div style="text-align: right;">Zapraszamy serdecznie, Bilbek Bilard Club.</div>
+                </article>
+            </div>
+        </header>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+                <article>
+                    <header>
+                        <div class="title">
+                            <h1>Ostatnie wiadomości</h1>
+                        </div>
+                    </header>
+                    <br>
+                    <%function monthDiff(d1, d2) {
+                        let months;
+                        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+                        months -= d1.getMonth();
+                        months += d2.getMonth();
+                        return months;
+                    }
+                    function changeDateNumber(number){
+                        if(number<10)
+                            number="0"+number;
+                        return number;
+                    }
+                    if(!news){ %>
+                        Brak informacji
+                    <%}else if(news.length!==0){
+                        const today = new Date();
+                        let count=0;
+                        for(let i=0; i<news.length ; i++){ 
+                            const date = news[i].date;
+                            if(monthDiff(date,today)>=0 && monthDiff(date,today)<3){
+                                count++;%>
+                                <b><%= changeDateNumber(date.getDate())+"."+changeDateNumber(date.getMonth())+"."+date.getFullYear()%></b><br>
+                                <%=news[i].text%><br><br>
+                            <%}
+                        }
+                        if(count===0){ %>
+                            Brak informacji
+                        <%}
+                    } %>
+                </article>
+            </div>
+        </header>
+    </body>
+</html>

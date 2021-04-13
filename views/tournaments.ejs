@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+                <article>
+                    <header>
+                        <div class="title">
+                            <h1>Turnieje</h1>
+                        </div>
+                    </header>
+                    <br>Poniżej znajduje się lista zaplanowanych na najbliższy czas turniejów. Organizowane są one w naszym klubie. 
+                    Osoby chętne do uczestnictwa, muszą jedynie zapisać się, a samą płatność dokonać gótówką na miejscu w dniu turnieju.<br><br>
+                    <%function checkSubscribe(tournamentname,username){
+                        let found=false;
+                        if(tournaments){
+                            for(let i=0 ; i<tournaments.length ; i++){
+                                if(tournaments[i].name===tournamentname){
+                                    for(let j=0 ; j<tournaments[i].peaple.length ; j++){
+                                        if(tournaments[i].peaple[j]===username){
+                                            found=true;
+                                        }
+                                    }
+                                }
+                            }
+                        }   
+                        return found;
+                    }
+                    function changeDateNumber(number){
+                        if(number<10)
+                            number="0"+number;
+                        return number;
+                    }
+                    if(messages.subscribed){ %>
+                        <div class="articlecenter">
+                            <b> <%= messages.subscribed %> </b>
+                        </div>
+                    <% }
+                    if(!tournaments || tournaments.length===0){%>
+                        Brak zaplanowanych turniejów
+                    <%}else{
+                        const today = new Date();
+                        let count=0;
+                        for(let i=0; i<tournaments.length ; i++){ 
+                            const date = tournaments[i].date;
+                            const peaple = tournaments[i].peaple.length;
+                            if(date > today){
+                                count++;%>
+                                <div class = "tournament">
+                                    <b><%= tournaments[i].name %></b><br>
+                                    <b><%= changeDateNumber(date.getDate())+"."+changeDateNumber(date.getMonth())+"."+date.getFullYear()+" "+changeDateNumber(date.getHours())+":"+changeDateNumber(date.getMinutes())%></b><br><br>
+                                    <b>Poziom: </b><%=tournaments[i].level%><br>
+                                    <img height="70" src="img/<%=tournaments[i].level%>.png"/><br>
+                                    <b>Koszt wstępu:</b> <%= tournaments[i].cost %><br>
+                                    <b>Nagroda:</b> <%= tournaments[i].reward %><br><br>
+                                    <b>Liczba osób:</b> <%=peaple%>/<%= tournaments[i].maxpeaple%>
+                                    <%if(user.admin){%>
+                                        <br><br>Zapisani użytkownicy: <br>
+                                        <select class="main">
+                                            <%  for(let j=0 ; j<tournaments[i].peaple.length ; j++){ %>
+                                                <option><%=tournaments[i].peaple[j]%></option>
+                                                <% } %> 
+                                        </select>
+                                    <% } %> 
+                                    <%if(peaple<=tournaments[i].maxpeaple && !checkSubscribe(tournaments[i].name,user.username)){ %> 
+                                    <br><br>
+                                    <form action="/turnieje" method="POST">
+                                        <input type="hidden" name = "tournamentname" value="<%= tournaments[i].name %>"/>
+                                        <input class="buttons" type="submit" value="Zapisz się"/>
+                                    </form>
+                                    <%}else if(checkSubscribe(tournaments[i].name,user.username)){%>
+                                        <br><br>Jesteś już zapisany
+                                    <% } %>
+                                </div>
+                                <%}
+                        }
+                        if(count===0){ %>
+                            Brak zaplanowanych turniejów
+                        <%}
+                    } %>
+                    <br>
+                </article>
+            </div>
+        </header>
+    </body>
+</html>

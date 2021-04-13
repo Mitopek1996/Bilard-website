@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+                <article>
+                    <header>
+                        <div class="title">
+                            <h1>Panel Administratora</h1>
+                        </div>
+                    </header>
+                    <br>
+                    <% if(typeof user == "undefined" || !user.admin){ %> 
+                        Wstęp tylko dla admina
+                    <%}else{ %> 
+                        <form action="/admin" method="POST">
+                            <div class="articlecenter">
+                                <div id="registermessage">
+                                    <h3>
+                                        <% if(messages.images) %> 
+                                            <%= messages.images %> 
+                                    </h3>
+                                </div>
+                            <h3>Dodaj nowego newsa</h3>
+                            </div>
+                            <div class="panelelement">
+                                <label for="text"><b>Wpisz treść:</b></label><br>
+                                <textarea id="text" name="text" style="width: 340px; height: 300px;" required></textarea><br><br>
+                                <input type="hidden" name="formid" value="addnews">
+                                <input class="buttons" type="submit" id="submit" name="submit" value="Dodaj newsa">
+                            </div>
+                        </form>
+
+                        <form action="/admin" method="POST">
+                            <div class="articlecenter">
+                                <div id="registermessage">
+                                    <h3>
+                                        <% if(messages.tournaments) %> 
+                                            <%= messages.tournaments %> 
+                                    </h3>
+                                </div>
+                            <h3>Dodaj nowy turniej</h3>
+                            </div>
+                            <div class="panelelement">
+                                <label for="level"><b>Poziom turnieju:</b></label><br>
+                                <div class="radiopanelelement">
+                                    <img src="img/low.png"/ width="50"><br>
+                                    <input type="radio" name="level" id="low" value="low" checked>
+                                    <label for="low">L</label>
+                                </div>
+                                <div class="radiopanelelement">
+                                    <img src="img/medium.png"/ width="50"><br>
+                                    <input type="radio" name="level" id="medium" value="medium">
+                                    <label for="medium">M</label>
+                                </div>
+                                <div class="radiopanelelement">
+                                    <img src="img/hard.png"/ width="50"><br>
+                                    <input type="radio" name="level" id="hard" value="hard">
+                                    <label for="hard">H</label>
+                                </div>
+                                <div style="clear: both;"></div>
+                                <label for="name"><b>Nazwa turnieju:</b></label><br>
+                                <input class="radius" type="text" id="name" name="name" required><br>
+                                <label for="date"><b>Data i godzina:</b></label><br>
+                                <input class="radius" type="datetime-local" id="date" name="date" style="width:160px" required><br>
+                                <label for="peaple"><b>Maksymalna ilość osób:</b></label><br>
+                                <input class="radius"  type="number" id="peaple" name="peaple" required><br>
+                                <label for="cost"><b>Koszt jednego biletu:</b></label><br>
+                                <input class="radius" type="number" id="cost" name="cost" required><br>
+                                <label for="reward"><b>Nagroda dla zwycięzcy:</b></label><br>
+                                <input class="radius" type="number" id="reward" name="reward" required><br><br>
+                                <input type="hidden" name="formid" value="addtournament">
+                                <input class="buttons" type="submit" id="submit" name="submit" value="Dodaj turniej">
+                            </div>
+                        </form>
+                        <% } %>
+                </article>
+            </div>
+        </header>
+    </body>
+</html>

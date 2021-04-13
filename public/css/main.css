@@ -1,0 +1,125 @@
+body{
+    font-family: 'Blinker', sans-serif;
+    margin: 0 !important;
+    background-color: #00092b;
+    background: url('../img/background.png');
+}
+
+nav{
+    margin-top: 0px;
+    height: 40px;
+    background: rgb(0,4,55);
+    background: linear-gradient(180deg, rgba(0,4,55,1) 0%, rgba(0,4,75,1) 50%, rgba(0,4,55,1) 100%);
+    border-bottom: 2px solid #000721;
+    border-top: 2px solid #000721;
+}
+#logo{
+    height: 150px;
+    text-align: center;
+    background: url('../img/bilardtables.png'),#00092b;
+    background-size: cover;
+
+}
+.menu{
+    text-align: center;
+    margin: 0;
+    list-style-type: none;
+    line-height: 120%;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.menu > li{
+    font-family: 'Blinker', sans-serif;
+	text-align:center;
+	font-size: 22px;
+    padding: 10px 25px 10px 25px;
+    display: inline-block;
+}
+
+a.menulink{
+    color:white;
+    text-decoration: none;
+}
+
+.container{
+    min-height: 200px;
+    margin-top: 40px;
+    padding: 5px 20px 20px 20px;
+    border-radius: 20px;
+    background-color:#a6bde0;
+    width: 960px;
+    margin-left:auto;
+    margin-right: auto;
+    border: 15px solid #00112e;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.title{
+    margin-bottom: 5px;
+    border-bottom: 1px solid #7a7a7a;
+	font-size: 18px;
+}
+
+.loginpanel * {
+    text-align: center;    
+    margin: 5px;
+    padding: 3px;
+}
+
+.articlecenter{
+    text-align: center;
+}
+
+.panelelement{
+    padding: 10px;
+    width: 350px;
+    margin: 20px auto 30px auto;
+    background-color:#a5acd0;
+    border: 1px gray solid;
+    border-radius: 15px;
+    line-height: 150%;
+}
+
+.radiopanelelement{
+    float: left;
+    text-align: center;
+    padding: 5px;
+}
+
+input.radius{
+    border-radius: 15px;
+    border:0px;
+    height: 15px;
+    padding: 5px;
+}
+
+input.buttons{
+    border-radius: 15px;
+    border:0px;
+    height: 25px;
+    background-color: #e6e9ff;
+}
+
+select.main{
+    margin: 5px;
+    width: 150px;
+    border-radius: 15px;
+    border:0px;
+    height: 25px;
+    background-color: #e6e9ff;
+}
+
+#registermessage{
+    color:#f70011;
+}
+.tournament{
+    padding: 10px;
+    margin: 20px auto 30px auto;
+    background-color:#a5acd0;
+    border: 1px gray solid;
+    border-radius: 15px;
+    width: 250px;
+    text-align: center;
+}
+

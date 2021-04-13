@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+            <article>
+                <header>
+                    <div class="title">
+                        <h1>Kontakt</h1>
+                    </div>
+                </header>
+                <br>
+                <div class="articlecenter">
+                    <iframe style="border: 1px solid black;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2392.9180544541937!2d23.124016416242053!3d53.14756519728242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ffc66493ed95d%3A0xc8396973d1d7047b!2sGajowa%2011%2C%2015-796%20Bia%C5%82ystok!5e0!3m2!1spl!2spl!4v1617194665234!5m2!1spl!2spl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <br><br>
+                    <b>Adres:</b> Gajowa 11  15-792 Białystok<br>
+                    <b>Telefon:</b> 500 777 333<br>
+                    <b>e-mail</b> bilbek@gmail.com<br>
+                    <br>Codzennie zapraszamy do odwiedzania naszego klubu. Godziny otwarcia: <b>pon-sob: 10-24, niedziela: 11-23</b>
+                </div>
+                <br>
+            </article>
+                
+            </div>
+        </header>
+
+    </body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Bilard</title>
+        <meta name="description" content="Strona Bilardu tworzona w celu poduczenia sie"/>
+        <meta name="keywords" content = "Bilard, gra, mecze, rozrywka, 8ball"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Blinker:wght@600&display=swap" rel="stylesheet">
+        <script>
+            let usernameValid = false;
+            let password1Valid = false;
+            let password2Valid = false;
+            function checkRegister(){
+                function checkHasNumber(pass){
+                    let patt1 = /\d/;
+                    return !patt1.test(pass)
+                }
+                const username = document.getElementById("username");
+                const password1 = document.getElementById("password1");
+                const password2 = document.getElementById("password2");
+                const button = document.getElementById("submit");
+                const message = document.getElementById("registermessage");
+
+                const usernameText = username.value;
+                const password1Text = password1.value;
+                const password2Text = password2.value;
+
+                if(usernameText.length<5 || usernameText.length>32){
+                    message.innerHTML = "<h4>Nazwa użytkownika musi mieć 5-32 znaków!</h4>"
+
+                    username.style.backgroundColor = "#ffc2db";
+                    button.disabled=true;
+                }else if(password1Text.length<5 || password1Text.length>32){
+                    message.innerHTML = "<h4>Hasło musi mieć 5-32 znaków!</h4>"
+
+                    username.style.backgroundColor = "#adffb4";
+                    password1.style.backgroundColor = "#ffc2db";
+                    button.disabled=true;
+                }else if(checkHasNumber(password1Text)){
+                    message.innerHTML = "<h4>Hasło musi mieć conajmniej jedną cyfrę!</h4>"
+
+                    username.style.backgroundColor = "#adffb4";
+                    password1.style.backgroundColor = "#ffc2db";
+                    button.disabled=true;
+                }else if(password1Text!==password2Text){
+                    message.innerHTML = "<h4>Oba hasła muszą być takie same!</h4>"
+
+                    username.style.backgroundColor = "#adffb4";
+                    password1.style.backgroundColor = "#adffb4";
+                    password2.style.backgroundColor = "#ffc2db";
+                    button.disabled=true;
+
+                }else{
+                    username.style.backgroundColor = "#adffb4";
+                    password1.style.backgroundColor = "#adffb4";
+                    password2.style.backgroundColor = "#adffb4";
+
+                    message.innerHTML = ""
+                    button.disabled=false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <a href="/"><img src="img/logo.png" height="150"/></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a class="menulink" href="/">Strona Główna</a></li>
+                    <li><a class="menulink" href="/news">Najnowsze informacje</a></li>
+                    <li><a class="menulink" href="/turnieje">Turnieje</a></li>
+                    <li><a class="menulink" href="/kontakt">Kontakt</a></li>
+                    <% if(typeof user != 'undefined'){%>
+                        <% if(user.admin){ %>
+                            <li><a class="menulink" href="/admin">Panel</a></li>
+                        <%} %>
+                        <li><a class="menulink" href="/logout">Wyloguj</a></li>
+                    <%}else{%>
+                        <li><a class="menulink" href="/logowanie">Zaloguj</a></li>
+                        <li><a class="menulink" href="/rejestracja">Rejestracja</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <div class="container">
+                <article>
+                    <header>
+                        <div class="title">
+                            <h1>Rejestracja</h1>
+                        </div>
+                    </header>
+                    <div class="loginpanel">
+                        <form action="/rejestracja" method="POST">
+                            <div id="registermessage">
+                                <h4>
+                                    <% if(messages.login) %> 
+                                    <%= messages.login %> 
+                                </h4>
+                            </div>
+                            <label for="username"><b>Nazwa użytkownika:</b></label><br>
+                            <input class="radius" type="text" id="username" name="username" oninput="checkRegister()" size="25" required><br>
+                            <label for="password"><b>Hasło:</b></label><br>
+                            <input class="radius" type="password" id="password1" name="password1" oninput="checkRegister()" size="25" required><br>
+                            <label for="repeat"><b>Powtórz hasło:</b></label><br>
+                            <input class="radius" type="password" id="password2" name="password2" oninput="checkRegister()" size="25" required><br>
+                            <input class="buttons" type="submit" id="submit" value="Zarejestruj" disabled="true">
+                        </form>
+                    </div>
+                </article>   
+            </div>
+        </header>
+    </body>
+</html>
